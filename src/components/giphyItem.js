@@ -1,27 +1,34 @@
-import { useEffect } from "react";
 import { giphyActions } from "../state/giphy-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGiphyData } from "../state/dataFetch-action";
-import { URL } from "../state/constants";
+import { useEffect } from "react";
+import styles from "./GiphyItem.module.css";
 
-const GiphyItem = () => {
-  const giphyItem = useSelector((state) => state.giphy.giphyItems);
-  const data = useSelector((state) => state.giphy.giphyData);
+const GiphyItem = (props) => {
+  const giphyData = useSelector((state) => state.giphy.giphyData);
   const dispatch = useDispatch();
-  console.log(giphyItem);
-  console.log(data);
+  const giphyElements = useSelector((state) => state.giphy.giphyElements);
+
+  console.log(giphyData);
+  console.log(giphyElements);
 
   useEffect(() => {
-    dispatch(fetchGiphyData());
+    giphyElements.forEach((el) => {
+      dispatch(fetchGiphyData());
+    });
   }, []);
 
   return (
     <>
-      {giphyItem.map((value) => (
-        <div key={value.id}>
-          <img src={value.url} width="200px" height="auto"></img>
-        </div>
-      ))}
+      <div className={styles.parent}>
+        <ul>
+          {giphyData.map((val) => (
+            <li className={styles.items} key={val.id}>
+              <img src={val.url} width="200px" height="auto"></img>
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 };

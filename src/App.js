@@ -1,10 +1,10 @@
-import GiphyItem from "./components/giphyItem";
+import GiphyItem from "./components/GiphyItem";
 
 function App() {
   return (
-    <div>
+    <>
       <GiphyItem />
-    </div>
+    </>
   );
 }
 

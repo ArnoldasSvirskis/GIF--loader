@@ -3,17 +3,26 @@ import { fetchGiphyData } from "./dataFetch-action";
 
 const giphySlice = createSlice({
   name: "giphy",
-  initialState: { locked: false, giphyItems: [], giphyData: [] },
+  initialState: {
+    amountOfGifs: 12,
+    locked: false,
+    giphyElements: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    giphyData: [],
+  },
   extraReducers: {
     [fetchGiphyData.fulfilled]: (state, { payload }) => {
-      state.giphyItems = payload;
-      state.giphyData = payload;
+      state.giphyData.push(payload);
+      state.giphyElements.shift();
+      state.giphyElements.push(payload);
     },
   },
 
   reducers: {
     addGiphy(state, action) {
       state.giphyItems = action.payload;
+    },
+    change(state) {
+      state.locked = !state.locked;
     },
   },
 });
