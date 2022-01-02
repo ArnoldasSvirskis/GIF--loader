@@ -1,7 +1,9 @@
+import GiphyItem from "./components/giphyItem";
+
 function App() {
   return (
     <div>
-      <p>gipphy</p>
+      <GiphyItem />
     </div>
   );
 }
