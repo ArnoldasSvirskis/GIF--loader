@@ -12,6 +12,8 @@ export const fetchGiphyData = createAsyncThunk(
     const d = await Promise.all([response1, response2, response3, response4]);
     const b = d.map((arr) => ({
       url: arr.data.images.fixed_height_downsampled.url,
+      id: arr.data.id,
+      date: arr.data.import_datetime,
     }));
 
     // const data = await d.json();

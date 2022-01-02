@@ -6,8 +6,10 @@ import { URL } from "../state/constants";
 
 const GiphyItem = () => {
   const giphyItem = useSelector((state) => state.giphy.giphyItems);
+  const data = useSelector((state) => state.giphy.giphyData);
   const dispatch = useDispatch();
   console.log(giphyItem);
+  console.log(data);
 
   useEffect(() => {
     dispatch(fetchGiphyData());
@@ -16,7 +18,7 @@ const GiphyItem = () => {
   return (
     <>
       {giphyItem.map((value) => (
-        <div>
+        <div key={value.id}>
           <img src={value.url} width="200px" height="auto"></img>
         </div>
       ))}

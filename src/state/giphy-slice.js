@@ -3,10 +3,11 @@ import { fetchGiphyData } from "./dataFetch-action";
 
 const giphySlice = createSlice({
   name: "giphy",
-  initialState: { locked: false, giphyItems: [] },
+  initialState: { locked: false, giphyItems: [], giphyData: [] },
   extraReducers: {
     [fetchGiphyData.fulfilled]: (state, { payload }) => {
       state.giphyItems = payload;
+      state.giphyData = payload;
     },
   },
 
