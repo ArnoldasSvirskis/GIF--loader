@@ -4,27 +4,38 @@ import { fetchGiphyData } from "../state/dataFetch-action";
 import { useEffect } from "react";
 import styles from "./GiphyItem.module.css";
 
-const GiphyItem = (props) => {
+const GiphyItem = () => {
   const giphyData = useSelector((state) => state.giphy.giphyData);
   const dispatch = useDispatch();
   const giphyElements = useSelector((state) => state.giphy.giphyElements);
+  const amountOfGifs = useSelector((state) => state.giphy.amountOfGifs);
+  const lockedGifs = useSelector((state) => state.giphy.clickedImg);
 
-  console.log(giphyData);
   console.log(giphyElements);
+  console.log(lockedGifs);
 
   useEffect(() => {
-    giphyElements.forEach((el) => {
+    if (giphyElements.length < amountOfGifs) {
       dispatch(fetchGiphyData());
-    });
-  }, []);
+    }
+  }, [giphyElements]);
+
+  const changeAllGifsHandler = () => {
+    dispatch(giphyActions.changeAllGifs());
+  };
+
+  const lockGifHandler = (event) => {
+    dispatch(giphyActions.lockGif(event.target.id));
+  };
 
   return (
     <>
-      <div className={styles.parent}>
+      <div>
+        <button onClick={changeAllGifsHandler}>click here</button>
         <ul>
-          {giphyData.map((val) => (
-            <li className={styles.items} key={val.id}>
-              <img src={val.url} width="200px" height="auto"></img>
+          {giphyElements.map((val) => (
+            <li onClick={lockGifHandler} key={val.id}>
+              <img src={val.url} id={val.id} width="200px" height="auto"></img>
             </li>
           ))}
         </ul>

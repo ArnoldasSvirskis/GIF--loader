@@ -12,6 +12,7 @@ export const fetchGiphyData = createAsyncThunk(
       url: data.data.images.fixed_height_downsampled.url,
       id: data.data.id,
       date: data.data.import_datetime,
+      locked: false,
     };
   }
 );
