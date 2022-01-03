@@ -5,14 +5,22 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchGiphyData = createAsyncThunk(
   "giphy/fetchGiphyData",
   async () => {
-    const response = await fetch(URL);
+    const response1 = await (await fetch(URL)).json();
+    const response2 = await (await fetch(URL)).json();
+    const response3 = await (await fetch(URL)).json();
+    const response4 = await (await fetch(URL)).json();
+    const response = await Promise.all([
+      response1,
+      response2,
+      response3,
+      response4,
+    ]);
+    const data = response.map((arr) => ({
+      url: arr.data.images.fixed_height_downsampled.url,
+      id: arr.data.id,
+      date: arr.data.import_datetime,
+    }));
 
-    const data = await response.json();
-    return {
-      url: data.data.images.fixed_height_downsampled.url,
-      id: data.data.id,
-      date: data.data.import_datetime,
-      locked: false,
-    };
+    return data;
   }
 );

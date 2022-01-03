@@ -8,24 +8,33 @@ const GiphyItem = () => {
   const giphyData = useSelector((state) => state.giphy.giphyData);
   const dispatch = useDispatch();
   const giphyElements = useSelector((state) => state.giphy.giphyElements);
-  const amountOfGifs = useSelector((state) => state.giphy.amountOfGifs);
-  const lockedGifs = useSelector((state) => state.giphy.clickedImg);
+  const lockedGifs = useSelector((state) => state.giphy.lockedGifEl);
+  const lockedGifsIndex = useSelector((state) => state.giphy.lockedGifIndexes);
 
   console.log(giphyElements);
   console.log(lockedGifs);
+  console.log(lockedGifsIndex);
 
   useEffect(() => {
-    if (giphyElements.length < amountOfGifs) {
-      dispatch(fetchGiphyData());
-    }
-  }, [giphyElements]);
+    dispatch(fetchGiphyData());
+  }, []);
 
   const changeAllGifsHandler = () => {
-    dispatch(giphyActions.changeAllGifs());
+    dispatch(fetchGiphyData());
   };
 
   const lockGifHandler = (event) => {
-    dispatch(giphyActions.lockGif(event.target.id));
+    dispatch(
+      giphyActions.lockGif({
+        url: event.target.src,
+        id: event.target.id,
+        index: giphyElements.indexOf(
+          giphyElements.find((val) => val.id === event.target.id)
+        ),
+      })
+    );
+    dispatch(giphyActions.isAnyLockedGif());
+    console.log(event);
   };
 
   return (

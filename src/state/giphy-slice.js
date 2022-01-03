@@ -6,35 +6,31 @@ const giphySlice = createSlice({
   initialState: {
     amountOfGifs: 4,
     locked: false,
-    giphyElements: [],
-    clickedImg: [],
-    lockedGifEl: [],
+    giphyElements: [], //all giphy data from API after initial fetch
+    loadedElements: [], //storing all new gifs (if there are any locked, keeping the same)
+    lockedGifIndexes: [], //locked gifs indexes
+    lockedGifEl: [], //locked gifs data
   },
   extraReducers: {
     [fetchGiphyData.fulfilled]: (state, { payload }) => {
-      state.giphyElements.push(payload);
+      if (state.locked) {
+        state.giphyElements = payload;
+      }
+      state.giphyElements = payload;
     },
   },
 
   reducers: {
-    change(state) {
-      state.locked = !state.locked;
-    },
-    changeAllGifs(state) {
-      state.giphyElements = [];
-    },
-
     lockGif(state, action) {
-      state.clickedImg = action.payload;
-      console.log(
+      state.lockedGifEl.push(action.payload);
+      state.lockedGifIndexes.push(
         state.giphyElements.indexOf(
-          state.giphyElements.find((val) => val.id === action.payload)
+          state.giphyElements.find((val) => val.id === action.payload.id)
         )
       );
-
-      // state.clickedImg.forEach((val) => {
-      //   state.lockedGifEl = state.giphyElements.find(val);
-      // });
+    },
+    isAnyLockedGif(state) {
+      if (state.lockedGifEl.length > 0) state.locked = true;
     },
   },
 });
