@@ -5,15 +5,8 @@ import { useEffect } from "react";
 import styles from "./GiphyItem.module.css";
 
 const GiphyItem = () => {
-  const giphyData = useSelector((state) => state.giphy.giphyData);
   const dispatch = useDispatch();
   const giphyElements = useSelector((state) => state.giphy.giphyElements);
-  const lockedGifs = useSelector((state) => state.giphy.lockedGifEl);
-  const lockedGifsIndex = useSelector((state) => state.giphy.lockedGifIndexes);
-
-  console.log(giphyElements);
-  console.log(lockedGifs);
-  console.log(lockedGifsIndex);
 
   useEffect(() => {
     dispatch(fetchGiphyData());
@@ -24,6 +17,8 @@ const GiphyItem = () => {
   };
 
   const lockGifHandler = (event) => {
+    console.log(event);
+
     dispatch(
       giphyActions.lockGif({
         url: event.target.src,
@@ -34,17 +29,16 @@ const GiphyItem = () => {
       })
     );
     dispatch(giphyActions.isAnyLockedGif());
-    console.log(event);
   };
 
   return (
     <>
+      <button onClick={changeAllGifsHandler}>click here</button>
       <div>
-        <button onClick={changeAllGifsHandler}>click here</button>
-        <ul>
+        <ul className={styles.parent}>
           {giphyElements.map((val) => (
             <li onClick={lockGifHandler} key={val.id}>
-              <img src={val.url} id={val.id} width="200px" height="auto"></img>
+              <img src={val.url} id={val.id} width="335px" height="260"></img>
             </li>
           ))}
         </ul>
