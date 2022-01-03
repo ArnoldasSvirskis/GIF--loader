@@ -12,7 +12,7 @@ const giphySlice = createSlice({
   },
   extraReducers: {
     [fetchGiphyData.fulfilled]: (state, { payload }) => {
-      if (state.locked) {
+      if (state.lockedGifEl.length > 0) {
         state.giphyElements = payload;
         state.lockedGifEl.forEach((el) => {
           state.giphyElements[el.index] = el;
@@ -23,11 +23,11 @@ const giphySlice = createSlice({
 
   reducers: {
     lockGif(state, action) {
-      state.lockedGifEl.push(action.payload);
-    },
-    isAnyLockedGif(state) {
-      if (state.lockedGifEl.length > 0) state.locked = true;
-      else state.locked = false;
+      if (state.lockedGifEl.some((val) => val.id == action.payload.id)) {
+        state.lockedGifEl = state.lockedGifEl.filter(
+          (val) => val.id !== action.payload.id
+        );
+      } else state.lockedGifEl.push(action.payload);
     },
   },
 });

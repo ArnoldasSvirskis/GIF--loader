@@ -10,8 +10,15 @@
   grid-auto-columns: 50px;
 }
 
-li .parent li {
+.parent li {
   list-style: none;
+}
+
+.parent button {
+  border: none;
+  background-color: inherit;
+
+  cursor: pointer;
 }
 
 .items {

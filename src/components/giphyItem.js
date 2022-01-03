@@ -7,6 +7,7 @@ import styles from "./GiphyItem.module.css";
 const GiphyItem = () => {
   const dispatch = useDispatch();
   const giphyElements = useSelector((state) => state.giphy.giphyElements);
+  const lockedgifs = useSelector((state) => state.giphy.lockedGifEl);
 
   useEffect(() => {
     dispatch(fetchGiphyData());
@@ -17,8 +18,6 @@ const GiphyItem = () => {
   };
 
   const lockGifHandler = (event) => {
-    console.log(event);
-
     dispatch(
       giphyActions.lockGif({
         url: event.target.src,
@@ -28,20 +27,17 @@ const GiphyItem = () => {
         ),
       })
     );
-    dispatch(giphyActions.isAnyLockedGif());
   };
 
   return (
     <>
       <button onClick={changeAllGifsHandler}>click here</button>
-      <div>
-        <ul className={styles.parent}>
-          {giphyElements.map((val) => (
-            <li onClick={lockGifHandler} key={val.id}>
-              <img src={val.url} id={val.id} width="335px" height="260"></img>
-            </li>
-          ))}
-        </ul>
+      <div className={styles.parent}>
+        {giphyElements.map((val) => (
+          <button onClick={lockGifHandler} key={val.id}>
+            <img src={val.url} id={val.id} width="335px" height="260"></img>
+          </button>
+        ))}
       </div>
     </>
   );
