@@ -1,11 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import logger from "redux-logger";
-import thunk from "redux-thunk";
 import giphySlice from "./giphy-slice";
+import uiSlice from "./ui-slice";
 
 const store = configureStore({
   // middleware: [thunk, logger],
-  reducer: { giphy: giphySlice.reducer },
+  reducer: { giphy: giphySlice.reducer, ui: uiSlice.reducer },
 });
 
 export default store;
