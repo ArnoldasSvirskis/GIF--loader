@@ -9,7 +9,9 @@
   width: 1440px;
   grid-column-gap: 10px;
   grid-row-gap: auto;
-  /* grid-auto-columns: 50px; */
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .parent li {

@@ -1,6 +1,6 @@
 import { giphyActions } from "../state/giphy-slice";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGiphyData } from "../state/dataFetch-action";
+
 import { useEffect } from "react";
 import styles from "../styles/GiphyItem.module.css";
 import { uiActions } from "../state/ui-slice";
@@ -14,13 +14,7 @@ const GiphyItem = () => {
   const id = useSelector((state) => state.ui.isGifActive.index);
   const idOfLock = useSelector((state) => state.ui.showLock.index);
 
-  useEffect(() => {
-    dispatch(fetchGiphyData());
-  }, []);
-
-  const changeAllGifsHandler = () => {
-    dispatch(fetchGiphyData());
-  };
+ 
 
   const lockGifHandler = (event) => {
     dispatch(
@@ -43,6 +37,7 @@ const GiphyItem = () => {
   };
 
   const showLockHandler = (event) => {
+    if (id.includes(Number(event.target.name))) return;
     dispatch(uiActions.showLockOption(Number(event.target.name)));
     console.log(event);
   };
@@ -55,16 +50,16 @@ const GiphyItem = () => {
 
   return (
     <>
-      <button onClick={changeAllGifsHandler}>click here</button>
-
       <div className={styles.parent}>
         {giphyElements.map((val, index) => (
           <button onClick={lockGifHandler} key={val.id}>
+            {/* render conditionaly click to unlock */}
             {id.includes(index) ? <UnlockText /> : ""}
+            {/* on mouseover, mouseleave event render "click to lock" */}
             {idOfLock.includes(index) ? <LockText /> : ""}
 
             <img
-              className={id.includes(index) ? styles.clicked : styles.active}
+              className={id.includes(index) ? styles.clicked : styles.active} //change gif border style when hover or when it's clicked
               onClick={makeGifActiveHandler}
               onMouseOver={showLockHandler}
               onMouseLeave={removeLockHandler}
