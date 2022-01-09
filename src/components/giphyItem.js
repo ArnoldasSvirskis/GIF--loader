@@ -61,8 +61,8 @@ const GiphyItem = () => {
               src={val.url}
               id={val.id}
               name={index}
-              width="335px"
-              height="260"
+              // width="335"
+              // height="260"
             ></img>
           </button>
         ))}

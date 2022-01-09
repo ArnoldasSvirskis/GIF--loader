@@ -60,3 +60,20 @@
   text-decoration: underline;
   display: inline;
 }
+
+@media (max-width: 400px) {
+  .nav {
+    width: 400px;
+    height: 120px;
+    display: block;
+  }
+
+  .nav h2 {
+    height: 15px;
+    padding-top: 20px;
+  }
+
+  .navclick {
+    width: 360px;
+  }
+}

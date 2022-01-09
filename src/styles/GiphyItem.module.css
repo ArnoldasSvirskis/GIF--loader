@@ -14,6 +14,11 @@
   margin: 0 auto;
 }
 
+.parent img {
+  width: 335px;
+  height: 260px;
+}
+
 .parent li {
   margin: 0;
   padding: 0;
@@ -42,4 +47,30 @@
   border: 4px solid rgb(67, 39, 245);
   height: 260px;
   width: 335px;
+}
+
+@media (max-width: 400px) {
+  .parent {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto auto auto auto;
+    width: 400px;
+    height: 900px;
+    grid-column-gap: 0;
+  }
+
+  .active:hover {
+    height: 130px;
+    width: 167.5px;
+  }
+
+  .clicked {
+    height: 130px;
+    width: 167.5px;
+  }
+
+  .parent img {
+    width: 167.5px;
+    height: 130px;
+    grid-row-gap: 0;
+  }
 }
