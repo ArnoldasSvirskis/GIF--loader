@@ -1,7 +1,5 @@
 import { giphyActions } from "../state/giphy-slice";
 import { useDispatch, useSelector } from "react-redux";
-
-import { useEffect } from "react";
 import styles from "../styles/GiphyItem.module.css";
 import { uiActions } from "../state/ui-slice";
 import UnlockText from "./UnlockText";
@@ -9,12 +7,11 @@ import LockText from "./LockText";
 
 const GiphyItem = () => {
   const dispatch = useDispatch();
+  //gifs loaded from API
   const giphyElements = useSelector((state) => state.giphy.giphyElements);
-  const isGifActive = useSelector((state) => state.ui.isGifActive);
-  const id = useSelector((state) => state.ui.isGifActive.index);
+  //indexes of locked gifs
+  const id = useSelector((state) => state.ui.lockedGifs);
   const idOfLock = useSelector((state) => state.ui.showLock.index);
-
- 
 
   const lockGifHandler = (event) => {
     dispatch(
@@ -27,26 +24,22 @@ const GiphyItem = () => {
       })
     );
   };
-  console.log(isGifActive);
 
   const makeGifActiveHandler = (event) => {
-    dispatch(uiActions.makeGifActive(Number(event.target.name)));
+    //sends index to state of locked gif
+    dispatch(uiActions.sendLockedGifIndex(Number(event.target.name)));
+    //removes styles/content of 'click to lock'
     dispatch(uiActions.removeLockOption(Number(event.target.name)));
-
-    console.log(event.target.name);
   };
 
   const showLockHandler = (event) => {
     if (id.includes(Number(event.target.name))) return;
     dispatch(uiActions.showLockOption(Number(event.target.name)));
-    console.log(event);
   };
 
   const removeLockHandler = (event) => {
     dispatch(uiActions.removeLockOption(Number(event.target.name)));
   };
-
-  console.log(idOfLock);
 
   return (
     <>

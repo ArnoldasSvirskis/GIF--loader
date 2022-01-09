@@ -33,7 +33,7 @@ export const fetchGiphyData = createAsyncThunk(
     ]);
     const data = response.map((arr) => ({
       url: arr.data.images.fixed_height_downsampled.url,
-      id: arr.data.id,
+      id: arr.data.id + Math.random() * 10,
       date: arr.data.import_datetime,
     }));
 

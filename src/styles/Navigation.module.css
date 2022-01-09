@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: auto;
+  width: 380px;
   height: auto;
   margin-right: 20px;
 }
@@ -37,24 +37,22 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-}
-
-.nav button p {
   color: rgb(255, 255, 255);
   font-family: "Rubik", sans-serif;
   font-size: 15px;
   font-weight: 500;
-  height: 14px;
-  width: 120px;
+  margin-left: 5px;
+  padding: 0;
 }
 
 .nav h3 {
   color: rgb(99, 100, 101);
   font-family: Rubik-Regular;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: normal;
-  height: 15px;
-  width: 180px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
 }
 
 .navclick h3 p {

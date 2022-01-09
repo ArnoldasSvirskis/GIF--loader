@@ -3,17 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 const uiSlice = createSlice({
   name: "ui",
   initialState: {
-    isGifActive: { clicked: false, index: [] },
+    lockedGifs: [],
     showLock: { hover: false, index: [] },
   },
   reducers: {
-    makeGifActive(state, action) {
-      if (state.isGifActive.index.some((val) => val == action.payload)) {
-        state.isGifActive.index = state.isGifActive.index.filter(
+    sendLockedGifIndex(state, action) {
+      if (state.lockedGifs.some((val) => val == action.payload)) {
+        state.lockedGifs = state.lockedGifs.filter(
           (val) => val != action.payload
         );
       } else {
-        state.isGifActive.index.push(action.payload);
+        state.lockedGifs.push(action.payload);
       }
     },
     showLockOption(state, action) {
