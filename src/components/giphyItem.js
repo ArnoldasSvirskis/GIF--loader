@@ -32,11 +32,13 @@ const GiphyItem = () => {
     dispatch(uiActions.removeLockOption(Number(event.target.name)));
   };
 
+  //on mouseover event shows 'click to lock'
   const showLockHandler = (event) => {
     if (id.includes(Number(event.target.name))) return;
     dispatch(uiActions.showLockOption(Number(event.target.name)));
   };
 
+  //removes index and option click to lock when onmouse leave event
   const removeLockHandler = (event) => {
     dispatch(uiActions.removeLockOption(Number(event.target.name)));
   };
