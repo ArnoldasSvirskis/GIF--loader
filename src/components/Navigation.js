@@ -23,7 +23,9 @@ const Navigation = () => {
 
     if (lockedGifsUI.length === 0) return;
     else {
-      lockedGifsUI.forEach((val) => dispatch(uiActions.makeGifActive(val)));
+      lockedGifsUI.forEach((val) =>
+        dispatch(uiActions.sendLockedGifIndex(val))
+      );
     }
   }, []);
 
