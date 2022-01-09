@@ -63,17 +63,19 @@
 
 @media (max-width: 400px) {
   .nav {
-    width: 400px;
+    width: 380px;
     height: 120px;
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
   .nav h2 {
     height: 15px;
     padding-top: 20px;
+    margin-left: 20px;
   }
 
   .navclick {
-    width: 360px;
+    width: 380px;
   }
 }

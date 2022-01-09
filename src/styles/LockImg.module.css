@@ -29,3 +29,10 @@
   font-family: "Rubik", sans-serif;
   font-weight: 500;
 }
+
+@media (max-width: 400px) {
+  .unlock {
+    top: 127.5px;
+    left: 7.5px;
+  }
+}
